@@ -5,13 +5,13 @@ entries:
     denied_action: message_continue
     designation: authentication
     layout: stacked
-    name: Default Authentication Flow
+    name: Source User Authentication Flow
     policy_engine_mode: any
     title: Welcome to Authentik!
   conditions: []
   identifiers:
     pk: 16210243-9e15-4dae-8b08-649a47091452
-    slug: default-authentication-flow
+    slug: source-user-auth-flow
   model: authentik_flows.flow
   state: present
 - attrs:
