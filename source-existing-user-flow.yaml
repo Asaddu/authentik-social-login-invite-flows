@@ -7,7 +7,7 @@ entries:
     layout: stacked
     name: Source Existing User Flow
     policy_engine_mode: any
-    title: Welcome to Asaddu Nexus!
+    title: Welcome to Authentik!
   conditions: []
   identifiers:
     pk: c581d6b8-2379-4283-843f-d24ef47589d3
