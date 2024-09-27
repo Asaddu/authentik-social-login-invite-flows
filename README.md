@@ -13,11 +13,12 @@ Instructions for how to setup invitation based enrollment for social logins for 
 - Create a duplicate social login for each social login you are using that has no enrollment flow attached that is **only** used for authentication.
 
 ## Detailed Instructions
-- Use two enrollment flows
+- Use two enrollment flows and a source authentication flow
   - Example flows are provided but may require attending to the below instructions since they're exports and I'm not sure if you'll still have to setup and attach the appropriate stages at least
 - The invitation-source-enrollment handles the Invitation and Identification stages
-  - This Identification Stage sends users to Sources
-- Sources authorize the users and send them to the second Enrollment Flow
+- This Identification Stage sends users to Sources
+- Sources sends the user to source-authentication flow
+- Once authenticated Sources sends the user to the second Enrollment Flow
 - The source-enrollment flow handles the actual enrollment
 
 ## Create Invitation Source Enrollment Flow
