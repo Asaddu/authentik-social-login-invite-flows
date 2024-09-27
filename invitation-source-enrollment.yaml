@@ -14,19 +14,6 @@ entries:
     slug: invitation-source-enrollment
   model: authentik_flows.flow
   state: present
-- attrs:
-    execution_logging: true
-    expression: 'request.context["invitation_flag"] = True,
-
-      request.context["flow_plan"].context["invitation_flag"] = True
-
-      return True'
-    name: invitation-in-effect
-  conditions: []
-  identifiers:
-    pk: ce1b343e-2a27-48e8-b39c-1eb422d49efd
-  model: authentik_policies_expression.expressionpolicy
-  state: present
 - attrs: {}
   conditions: []
   identifiers:
@@ -39,7 +26,7 @@ entries:
     pretend_user_exists: true
     show_matched_user: true
     sources:
-    - aaae9dd5-ba80-4709-a634-0ee71faf7d30
+    - 4d13e398-216e-4879-a666-2d17186d0c71
   conditions: []
   identifiers:
     name: default-authentication-identification
@@ -70,19 +57,8 @@ entries:
     target: 349e2e2a-194f-4791-9423-6684b20c39e8
   model: authentik_flows.flowstagebinding
   state: present
-- attrs:
-    enabled: true
-    timeout: 30
-  conditions: []
-  identifiers:
-    order: 0
-    pk: 1f4b9c1f-8e02-4056-b47e-00f1d7362753
-    policy: ce1b343e-2a27-48e8-b39c-1eb422d49efd
-    target: 2692db9f-1050-4e44-a3a7-b70cd075f0da
-  model: authentik_policies.policybinding
-  state: present
 metadata:
   labels:
     blueprints.goauthentik.io/generated: 'true'
-  name: authentik Export - 2024-09-27 16:19:06.799205+00:00
+  name: authentik Export - 2024-09-27 17:29:15.104205+00:00
 version: 1
