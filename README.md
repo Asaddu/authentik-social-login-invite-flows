@@ -42,9 +42,8 @@ Instructions for how to setup invitation based enrollment for social logins for 
 5. This flow is complete.
 ## Create or Verify Invitation/Default Source Enrollment Flow
 1. Verify you have a source enrollment flow with the following settings, creating a new one for invitations if you will be using other methods for source enrollment still:
-	1. Confirm Flow Policies under the Policy / Group / User Bindings tab:
-		1. There should be a policy called default-source-enrollment-if-sso with the expression: return ak_is_sso_flow
-		2. Create and bind a policy called source-enrollment-invitation-only with a lower binding binding order and the expression: ```request.context.get("invitation_in_effect", False)```
+	1. Confirm Flow Policy under the Policy / Group / User Bindings tab:
+		1. There should be a policy called default-source-enrollment-if-sso with the expression: ```return ak_is_sso_flow```
 	2. Under the main flow settings the Policy engine mode should be set to all.
 There should be 3 stage bindings:
 	1. default-source-enrollment-prompt (Prompt Stage) with the Field default-source-enrollment-field-username selected.
