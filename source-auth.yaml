@@ -1,0 +1,94 @@
+context: {}
+entries:
+- attrs:
+    authentication: require_unauthenticated
+    denied_action: message_continue
+    designation: authentication
+    layout: stacked
+    name: Source Authentication Flow
+    policy_engine_mode: all
+    title: Welcome to Authentik!
+  conditions: []
+  identifiers:
+    pk: 53b9010b-252d-453e-9331-1f1d38dd83ef
+    slug: source-auth
+  model: authentik_flows.flow
+  state: present
+- attrs:
+    expression: '# This policy ensures that this flow can only be used when the user
+
+      # is in a SSO Flow (meaning they come from an external IdP)
+
+      return ak_is_sso_flow'
+    name: default-source-authentication-if-sso
+  conditions: []
+  identifiers:
+    pk: 973f05d7-ecce-44be-9799-919f5004afd7
+  model: authentik_policies_expression.expressionpolicy
+  state: present
+- attrs:
+    execution_logging: true
+    expression: '# Log the full context
+
+      ak_logger.info("Logging full context", context=request.context)
+
+
+      # Allow the flow to proceed
+
+      return True'
+    name: context-logging
+  conditions: []
+  identifiers:
+    pk: 792fb66c-5b74-4485-bd13-9c3d2d0b571f
+  model: authentik_policies_expression.expressionpolicy
+  state: present
+- attrs:
+    geoip_binding: no_binding
+    network_binding: no_binding
+    remember_me_offset: days=31
+    session_duration: seconds=0
+  conditions: []
+  identifiers:
+    name: default-source-authentication-login
+    pk: e7c7dfd1-a139-4334-909b-0b29f9751aad
+  model: authentik_stages_user_login.userloginstage
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  identifiers:
+    order: 0
+    pk: e093be25-e3eb-457e-95ce-8bd43abbf67b
+    stage: e7c7dfd1-a139-4334-909b-0b29f9751aad
+    target: 53b9010b-252d-453e-9331-1f1d38dd83ef
+  model: authentik_flows.flowstagebinding
+  state: present
+- attrs:
+    enabled: true
+    timeout: 30
+  conditions: []
+  identifiers:
+    order: 1
+    pk: 218181fb-09b9-4d1c-9a42-c7ced56ffc95
+    policy: 973f05d7-ecce-44be-9799-919f5004afd7
+    target: 53b9010b-252d-453e-9331-1f1d38dd83ef
+  model: authentik_policies.policybinding
+  state: present
+- attrs:
+    enabled: true
+    timeout: 30
+  conditions: []
+  identifiers:
+    order: 0
+    pk: 72708487-b9dd-4552-a4d6-39c56566bfa3
+    policy: 792fb66c-5b74-4485-bd13-9c3d2d0b571f
+    target: 53b9010b-252d-453e-9331-1f1d38dd83ef
+  model: authentik_policies.policybinding
+  state: present
+metadata:
+  labels:
+    blueprints.goauthentik.io/generated: 'true'
+  name: authentik Export - 2024-09-27 18:01:58.147084+00:00
+version: 1

@@ -1,0 +1,64 @@
+context: {}
+entries:
+- attrs:
+    authentication: none
+    denied_action: message_continue
+    designation: enrollment
+    layout: stacked
+    name: Source Invitation Flow
+    policy_engine_mode: any
+    title: Welcome to Authentik!
+  conditions: []
+  identifiers:
+    pk: 349e2e2a-194f-4791-9423-6684b20c39e8
+    slug: source-invitation-flow
+  model: authentik_flows.flow
+  state: present
+- attrs:
+    case_insensitive_matching: true
+    pretend_user_exists: true
+    show_matched_user: true
+    sources:
+    - aaae9dd5-ba80-4709-a634-0ee71faf7d30
+  conditions: []
+  identifiers:
+    name: source-enrollment-identification
+    pk: 36e1e837-45d8-482c-8509-f40f15aa9f7b
+  model: authentik_stages_identification.identificationstage
+  state: present
+- attrs: {}
+  conditions: []
+  identifiers:
+    name: source-invitation
+    pk: 7b288fbe-49fc-4af8-9c0f-7ff088d253ae
+  model: authentik_stages_invitation.invitationstage
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  identifiers:
+    order: 0
+    pk: 28195fa1-6165-408b-9952-94eaac91456b
+    stage: 7b288fbe-49fc-4af8-9c0f-7ff088d253ae
+    target: 349e2e2a-194f-4791-9423-6684b20c39e8
+  model: authentik_flows.flowstagebinding
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  identifiers:
+    order: 5
+    pk: 2692db9f-1050-4e44-a3a7-b70cd075f0da
+    stage: 36e1e837-45d8-482c-8509-f40f15aa9f7b
+    target: 349e2e2a-194f-4791-9423-6684b20c39e8
+  model: authentik_flows.flowstagebinding
+  state: present
+metadata:
+  labels:
+    blueprints.goauthentik.io/generated: 'true'
+  name: authentik Export - 2024-09-27 18:04:12.317505+00:00
+version: 1
