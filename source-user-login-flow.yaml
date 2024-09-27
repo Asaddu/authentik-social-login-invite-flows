@@ -1,0 +1,103 @@
+context: {}
+entries:
+- attrs:
+    authentication: none
+    denied_action: message_continue
+    designation: authentication
+    layout: stacked
+    name: Source User Login Flow
+    policy_engine_mode: any
+    title: Welcome to Asaddu Nexus!
+  conditions: []
+  identifiers:
+    pk: 16210243-9e15-4dae-8b08-649a47091452
+    slug: source-user-login-flow
+  model: authentik_flows.flow
+  permissions: []
+  state: present
+- attrs:
+    device_classes:
+    - static
+    - totp
+    - webauthn
+    - duo
+    - sms
+    last_auth_threshold: seconds=0
+    not_configured_action: skip
+    webauthn_user_verification: preferred
+  conditions: []
+  identifiers:
+    name: default-authentication-mfa-validation
+    pk: 4b4b2a9f-5d6d-4115-b289-6fa96c53598f
+  model: authentik_stages_authenticator_validate.authenticatorvalidatestage
+  permissions: []
+  state: present
+- attrs:
+    geoip_binding: no_binding
+    network_binding: no_binding
+    remember_me_offset: seconds=0
+    session_duration: seconds=0
+  conditions: []
+  identifiers:
+    name: default-authentication-login
+    pk: 149a034c-7e7a-4bb7-a4d4-07a17daa2725
+  model: authentik_stages_user_login.userloginstage
+  permissions: []
+  state: present
+- attrs:
+    case_insensitive_matching: true
+    pretend_user_exists: true
+    show_matched_user: true
+    sources:
+    - 4d13e398-216e-4879-a666-2d17186d0c71
+  conditions: []
+  identifiers:
+    name: source-authentication-identification
+    pk: f3e6ae20-397d-47a4-b33f-f1f9d9139d01
+  model: authentik_stages_identification.identificationstage
+  permissions: []
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  identifiers:
+    order: 10
+    pk: d634e37e-bb8c-447b-98e6-ba525e4aee93
+    stage: f3e6ae20-397d-47a4-b33f-f1f9d9139d01
+    target: 16210243-9e15-4dae-8b08-649a47091452
+  model: authentik_flows.flowstagebinding
+  permissions: []
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  identifiers:
+    order: 30
+    pk: e42f46d8-937b-42b3-a045-f4fe805f3e90
+    stage: 4b4b2a9f-5d6d-4115-b289-6fa96c53598f
+    target: 16210243-9e15-4dae-8b08-649a47091452
+  model: authentik_flows.flowstagebinding
+  permissions: []
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  identifiers:
+    order: 100
+    pk: 49e79f97-ac57-40e1-a4f1-e849b58c8af3
+    stage: 149a034c-7e7a-4bb7-a4d4-07a17daa2725
+    target: 16210243-9e15-4dae-8b08-649a47091452
+  model: authentik_flows.flowstagebinding
+  permissions: []
+  state: present
+metadata:
+  labels:
+    blueprints.goauthentik.io/generated: 'true'
+  name: authentik Export - 2024-09-27 20:29:27.067398+00:00
+version: 1
